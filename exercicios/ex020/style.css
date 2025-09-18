@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #3dfcec;
+}
+
+div#principal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div#filha {
+    background-color: white;
+    width: 700px;
+}
+
+    h1 {
+        text-align: center;
+        text-decoration: underline;
+        
+    }
+
+    h2{
+        text-align: center;
+        text-decoration: underline;
+    }
+
+    p {
+        text-align: justify;
+    }
+
+    .video {
+        text-align: center;
+    }
+
+    a {
+        text-decoration: none;
+    }
