@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exemplo de Site Completo</title>
+  <meta name="description" content="Exemplo simples de site com header, menu, conteúdo e footer usando HTML e CSS" />
+  <style>
+    /* Reset simples */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      line-height:1.5;
+      color:#1f2937;
+      background:linear-gradient(180deg,#f7fafc 0%, #ffffff 100%);
+      padding:0 1rem;
+    }
+
+    /* Layout container */
+    .site{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+
+    /* Header */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:0.75rem 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:0.75rem;
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .logo{
+      width:44px;height:44px;border-radius:8px;
+      background:linear-gradient(135deg,#2563eb,#06b6d4);
+      display:flex;align-items:center;justify-content:center;
+      color:white;font-weight:700;font-size:1.05rem;
+      box-shadow:0 4px 12px rgba(37,99,235,0.15);
+    }
+
+    nav{
+      display:flex;align-items:center;gap:1rem;
+    }
+
+    .nav-links{display:flex;gap:0.5rem}
+    .nav-links a{
+      padding:0.5rem 0.75rem;border-radius:6px;text-decoration:none;color:#374151;
+      font-weight:600;font-size:0.95rem;
+    }
+    .nav-links a:hover{background:#eef2ff;color:#1e293b}
+
+    .btn{
+      background:#2563eb;color:white;padding:0.5rem 0.9rem;border-radius:8px;text-decoration:none;font-weight:600;
+      box-shadow:0 6px 18px rgba(37,99,235,0.12);
+    }
+    .btn:hover{filter:brightness(0.95)}
+
+    /* Mobile menu button */
+    .menu-toggle{display:none;border:0;background:transparent;font-size:1.25rem}
+
+    /* Hero */
+    .hero{
+      display:flex;flex-direction:column;gap:1rem;padding:1.5rem 0 2rem;
+    }
+    .hero .title{font-size:clamp(1.5rem,3.5vw,2.4rem);font-weight:800;color:#0f172a}
+    .hero .subtitle{color:#475569;font-size:1rem}
+
+    .hero-cta{display:flex;gap:0.75rem;margin-top:0.75rem}
+
+    /* Content grid */
+    .grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding-bottom:2rem
+    }
+    .card{
+      background:white;border-radius:12px;padding:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);
+      border:1px solid rgba(15,23,42,0.03);
+    }
+    .card h3{font-size:1.05rem;margin-bottom:0.5rem}
+    .card p{color:#475569;font-size:0.95rem}
+
+    /* Main + aside layout */
+    .main-area{display:flex;gap:1rem;align-items:flex-start}
+    main{flex:2}
+    aside{flex:1}
+    .article{background:white;padding:1rem;border-radius:10px;margin-bottom:1rem;box-shadow:0 6px 18px rgba(2,6,23,0.04)}
+
+    /* Footer */
+    footer{
+      margin-top:auto;padding:1.25rem 0;border-top:1px solid rgba(15,23,42,0.04);color:#6b7280;font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;gap:1rem
+    }
+
+    /* Responsividade */
+    @media (max-width:900px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .main-area{flex-direction:column}
+      aside{order:2}
+    }
+    @media (max-width:640px){
+      .nav-links{display:none}
+      .menu-toggle{display:inline-block}
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* Menu móvel (ativa quando .mobile-open no body) */
+    .mobile-nav{display:none;position:fixed;inset:0;background:rgba(2,6,23,0.6);backdrop-filter:blur(3px);z-index:40}
+    .mobile-nav .panel{background:white;width:280px;height:100%;padding:1rem}
+    .mobile-nav a{display:block;padding:0.75rem 0;border-bottom:1px solid #f1f5f9}
+    body.mobile-open .mobile-nav{display:block}
+
+    /* pequenas melhorias visuais */
+    .muted{color:#6b7280}
+    .spaced{margin-top:0.75rem}
+
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <header>
+      <a class="brand" href="#">
+        <span class="logo">LN</span>
+        <div>
+          <div style="font-weight:700">Nome do Site</div>
+          <div class="muted" style="font-size:0.85rem">Um subtítulo curto</div>
+        </div>
+      </a>
+
+      <nav aria-label="Navegação principal">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMobile()">☰</button>
+        <div class="nav-links">
+          <a href="#">Início</a>
+          <a href="#">Serviços</a>
+          <a href="#">Sobre</a>
+          <a href="#">Contato</a>
+        </div>
+        <a class="btn" href="#">Começar</a>
+      </nav>
+    </header>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="mobile-nav" role="dialog" aria-modal="true" style="display:none">
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>Menu</strong>
+          <button onclick="toggleMobile()" aria-label="Fechar menu">✕</button>
+        </div>
+        <nav style="margin-top:1rem">
+          <a href="#">Início</a>
+          <a href="#">Serviços</a>
+          <a href="#">Sobre</a>
+          <a href="#">Contato</a>
+          <a href="#" style="margin-top:1rem;display:inline-block;padding:0.6rem 0.8rem;background:#2563eb;color:white;border-radius:8px;text-decoration:none">Começar</a>
+        </nav>
+      </div>
+    </div>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title" class="title">Um exemplo simples de site para treinar HTML e CSS</h1>
+        <p class="subtitle">Cabeçalho, menu, conteúdo principal, cards e rodapé — tudo em um arquivo. Código limpo e responsivo.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#">Ver demonstração</a>
+          <a class="muted" href="#">Saiba mais →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Destaques">
+      <article class="card">
+        <h3>Destaque 1</h3>
+        <p>Uma breve descrição do recurso ou serviço. Use esse espaço para apresentar algo importante ao visitante.</p>
+      </article>
+      <article class="card">
+        <h3>Destaque 2</h3>
+        <p>Descrição curta. Pequenas chamadas ajudam a manter o visitante engajado e a navegar pelo site.</p>
+      </article>
+      <article class="card">
+        <h3>Destaque 3</h3>
+        <p>Outra chamada de atenção: benefícios, provas sociais ou um resumo do que você oferece.</p>
+      </article>
+    </section>
+
+    <div class="main-area">
+      <main>
+        <article class="article">
+          <h2>Artigo Principal</h2>
+          <p class="spaced">Aqui vai o conteúdo principal da página. Explique seu produto, mostre imagens, inclua listas e blocos de citação se for necessário. Esse template usa marcação semântica (header, main, article, aside, footer) que ajuda tanto usuários quanto mecanismos de busca e leitores de tela.</p>
+
+          <h3 class="spaced">Exemplo de lista</h3>
+          <ul style="margin-top:0.5rem;padding-left:1.25rem;">
+            <li>Item 1: benefício ou característica.</li>
+            <li>Item 2: resultado esperado.</li>
+            <li>Item 3: chamada para ação.</li>
+          </ul>
+
+          <p class="spaced">Pro tip: mantenha blocos de texto curtos e use subtítulos para facilitar a leitura.</p>
+        </article>
+
+        <article class="article">
+          <h2>Outro Artigo</h2>
+          <p class="spaced">Se quiser, adicione imagens com a tag &lt;img&gt; ou incorpore vídeos. Lembre-se de sempre usar o atributo alt em imagens para acessibilidade.</p>
+        </article>
+      </main>
+
+      <aside>
+        <div class="card">
+          <h3>Sobre</h3>
+          <p>Texto curto sobre o site ou a empresa. Um resumo simples com contatos ou links para redes sociais.</p>
+        </div>
+
+        <div class="card spaced">
+          <h3>Assine nossa newsletter</h3>
+          <form onsubmit="event.preventDefault();alert('Assinado! (exemplo)')" style="margin-top:0.5rem;">
+            <label for="email" class="muted">E-mail</label>
+            <input id="email" type="email" required placeholder="seu@email.com" style="width:100%;padding:0.6rem;margin-top:0.4rem;border-radius:8px;border:1px solid #e6edf3">
+            <button class="btn" style="width:100%;margin-top:0.6rem">Inscrever</button>
+          </form>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div>
+        © <span id="ano"></span> Nome do Site. Todos os direitos reservados.
+      </div>
+      <div class="muted">Feito com ♥ — Exemplo responsivo</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Insere o ano atual automaticamente
+    document.getElementById('ano').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    function toggleMobile(){
+      const open = document.body.classList.toggle('mobile-open');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if(open){
+        mobileMenu.style.display = 'block';
+        document.querySelector('.menu-toggle').setAttribute('aria-expanded','true');
+      } else {
+        mobileMenu.style.display = 'none';
+        document.querySelector('.menu-toggle').setAttribute('aria-expanded','false');
+      }
+    }
+
+    // Fecha o menu móvel ao clicar fora do painel
+    document.getElementById('mobile-menu').addEventListener('click', function(e){
+      if(e.target === this) toggleMobile();
+    });
+  </script>
+</body>
+</html>
