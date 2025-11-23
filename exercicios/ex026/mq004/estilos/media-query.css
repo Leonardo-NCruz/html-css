@@ -3,9 +3,28 @@
 /*Todas as demais mídias*/
 
 @media print {
+
+    *{
+        font-family: 'Courier New', Courier, monospace;
+    }
+
     body {
         background-image: url(../imagens/back-print.jpg); /* DESNECESSÁRIO */
-        font-family: 'Courier New', Courier, monospace;
+    }
+
+    main {
+        width: 90vw;
+        border: 2px solid black;
+    }
+
+    main::after {
+        content: 'Essa impressão foi feita através do site www.cursoemvideo.com';
+        text-decoration: overline;
+    }
+
+    main h1 {
+        color: black;
+        text-shadow: none;
     }
 
     img#phone { display: none;}
