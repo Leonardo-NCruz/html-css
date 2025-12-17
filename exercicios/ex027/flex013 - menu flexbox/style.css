@@ -32,7 +32,7 @@ header > nav {
 }
 
 header > nav > a {
-    margin: 5px 20px;
+    margin: 5px;
     padding: 15px;
     border-radius: 10px;
     background-color: black;
@@ -55,20 +55,30 @@ main {
     box-shadow: 2px 2px 3px rgb(0, 0, 0);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 600px) {
+
+    header {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
     
     header > h1 {
-        text-align: left;
         padding-bottom: 0px;
+        flex: 0 0 200px;
+        text-align: left;
     }
 
     header > nav {
         display: flex;
         flex-flow: row nowrap;
+        justify-content: flex-end;
     }
 
     header > nav > a {
         margin: 5px;
         border-radius: 5px;
+        padding: 10px;
     }
 }
